@@ -43,6 +43,8 @@ class GroupsController < ApplicationController
     else
       flash[:warning] = "你已经是本讨论板成员！"
     end
+    redirect_to group_path(@group)
+  end
     def quit
       @group = Group.find(params[:id])
       if current_user.is_member_of?(@group)
@@ -51,7 +53,6 @@ class GroupsController < ApplicationController
       end
       redirect_to group_path(@group)
     end
-  end
   private
   def find_group_and_check_permission
     @group = Group.find(params[:id])
